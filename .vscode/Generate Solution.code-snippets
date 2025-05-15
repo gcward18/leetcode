@@ -28,8 +28,8 @@
 			"",
 			"if __name__ == \"__main__\":",
 			"	solution = Solution()",
-			"	input = []",
-			"	assert solution.func(input[0]) == 0"
+			"	input, answer = 0, 0",
+			"	assert solution.func(input) == answer"
 		]
 	}
 }
