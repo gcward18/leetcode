@@ -19,6 +19,7 @@
 		"scope": "python",
 		"prefix": "solution-template",
 		"body": [
+			"import time",
 			"class Solution:",
 			"	def $1func(self, **params) -> int:",
 			"		'''",
@@ -29,7 +30,10 @@
 			"if __name__ == \"__main__\":",
 			"	solution = Solution()",
 			"	input, answer = 0, 0",
+			"	start = time.time()"
 			"	result = solution.func(input)"
+			"	end = time.time()",
+			"	print(f\"Elapsed time for func to run was : {end - start:.10f} seconds\")"
 			"	assert result == answer"
 		]
 	}
