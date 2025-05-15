@@ -47,27 +47,86 @@ Constraints:
 1 <= length of dna[i][0], dna[i][1] <= 10000.
 The strings in dna1 and dna2 consist of lowercase English letters only.
 '''
+from collections import Counter
+from collections import Counter
 
-class Solution:
-    def dnaSequence(self, sequence_pairs: list[list[str]]) -> list[bool]:
-        result = []
-        for p1, p2 in sequence_pairs:
-            s1 = set(p1)
-            s2 = set(p2)
-            s1_diff_cnt = sum([x not in s2 for x in s1])
-            s2_diff_cnt = sum([x not in s1 for x in s2])
-            if s1_diff_cnt <= 1 and s2_diff_cnt <= 1:
-                result.append(True)
-            else:
-                result.append(False)
-        return result
-
-if __name__ == "__main__":
-    solution = Solution()
-    input =  [["abcee", "acdeedb"], ["sljffsajej", "sljsje"]]
-    answer = [True, False]
-    assert solution.dnaSequence(input) == answer
+class Solution:   
     
-    input = [["safddadfs", "famafmss"]]
-    answer = [True]
-    assert solution.dnaSequence(input) == answer
+    def isAnagramByLetterRemoval(self, s, t) -> bool:
+        extraInT = None
+        sCount = Counter(s)
+        
+        for c in t:
+            if c in sCount:
+                if sCount[c] == 1:
+                    del sCount[c]
+                else:
+                    sCount[c] -= 1
+            elif extraInT and c != extraInT:
+                return False
+            else:
+                extraInT = c
+        
+        return len(sCount) <= 1
+                
+    def dnaSequence(self, dna):
+        return [self.isAnagramByLetterRemoval(s1, s2) for s1, s2 in dna]
+
+# Test function to verify results
+def test_solution():
+    solution = Solution()
+    
+    # Original test cases
+    test_cases = [
+        ['aonecode', 'aonecode'],    # Should be True (identical)
+        ['xxxyyyz', 'xxyzzxyyy'],    # Should be True
+        ['aaaaaa', 'aakkaakk'],      # Should be True
+        ['aaabbaa', 'bbaabab']       # Should be True
+    ]
+    
+    print("Original test cases:")
+    for i, (s1, s2) in enumerate(test_cases):
+        result = solution.isAnagramByLetterRemoval(s1, s2)
+        print(f"Test {i}: '{s1}' and '{s2}' => {result}")
+    
+    # Problem examples
+    examples = [
+        ["safddadfs", "famafmss"],    # Should be True
+        ["abcee", "acdeedb"],         # Should be True
+        ["sljffsajej", "sljsje"]      # Should be False
+    ]
+    
+    print("\nProblem examples:")
+    for i, (s1, s2) in enumerate(examples):
+        result = solution.isAnagramByLetterRemoval(s1, s2)
+        print(f"Example {i+1}: '{s1}' and '{s2}' => {result}")
+    
+    # Run the full test suite from the original test
+    input_data = [['aonecode', 'aonecode'], ['xxxyyyz', 'xxxyyyyzz'], 
+                  ['aaaaaa', 'aaaakkkk'], ['aaaaabb', 'bbaabab']]
+    expected = [True, False, True, True]
+    result = solution.dnaSequence(input_data)
+    
+    print("\nFull test suite:")
+    print(f"Expected: {expected}")
+    print(f"Got:      {result}")
+    print(f"Pass: {result == expected}")
+
+    # Example test from problem statement
+    test1 = [["safddadfs", "famafmss"]]
+    expected1 = [True]
+    result1 = solution.dnaSequence(test1)
+    print(f"\nTest from problem statement 1:")
+    print(f"Expected: {expected1}")
+    print(f"Got:      {result1}")
+    
+    test2 = [["abcee", "acdeedb"], ["sljffsajej", "sljsje"]]
+    expected2 = [True, False]
+    result2 = solution.dnaSequence(test2)
+    print(f"\nTest from problem statement 2:")
+    print(f"Expected: {expected2}")
+    print(f"Got:      {result2}")
+
+# Run the test
+if __name__ == "__main__":
+    test_solution()

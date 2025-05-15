@@ -29,7 +29,8 @@
 			"if __name__ == \"__main__\":",
 			"	solution = Solution()",
 			"	input, answer = 0, 0",
-			"	assert solution.func(input) == answer"
+			"	result = solution.func(input)"
+			"	assert result == answer"
 		]
 	}
 }
