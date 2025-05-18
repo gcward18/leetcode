@@ -19,6 +19,7 @@
 		"scope": "python",
 		"prefix": "solution-template",
 		"body": [
+			"from collections import Counter, defaultdict",
 			"import time",
 			"class Solution:",
 			"	def $1func(self, **params) -> int:",
