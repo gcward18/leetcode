@@ -84,6 +84,15 @@ The maximum achievable greyness is 2.
 Constraints:
 1 ≤ n, m ≤ 1000
 pixels[i][j] = '0' or '1' for all 0 ≤ i < n and 0 ≤ j < m
+
+bruteforce times:
+Elapsed time for maximumGreyness to run was : 0.0001053810 seconds
+Elapsed time for maximumGreyness to run was : 0.0000591278 seconds
+Elapsed time for maximumGreyness to run was : 0.0000472069 seconds
+
+Elapsed time for maximumGreyness to run was : 0.0000274181 seconds
+Elapsed time for maximumGreyness to run was : 0.0000104904 seconds
+Elapsed time for maximumGreyness to run was : 0.0000114441 seconds
 '''
 
 from collections import Counter, defaultdict
@@ -96,28 +105,17 @@ class Solution:
         colOnes = [0] * COLS
         colZeros = [0] * COLS
         maxGreyness = 0
-        result = [[0] * COLS for _ in range(ROWS)]
         
         for row in range(ROWS):
             for col in range(COLS):
-                colZeros = 0
-                colOnes = 0
-                rowZeros = 0
-                rowOnes = 0
-                
-                for k in range(ROWS):
-                    colOnes += int(mat[k][col])
-                    colZeros += 1 if mat[k][col] == '0' else 0
-                for k in range(COLS):
-                    rowZeros += 1 if mat[row][k] == '0' else 0
-                    rowOnes += int(mat[row][k])
-
-                total = (rowOnes + colOnes) - (rowZeros + colZeros)
-                maxGreyness = max(maxGreyness, total)
-                result[row][col] = total
+                rowOnes[row] += int(mat[row][col])
+                rowZeros[row] += 1 if mat[row][col] == '0' else 0
+                colOnes[col] += int(mat[row][col])
+                colZeros[col] += 1 if mat[row][col] == '0' else 0
         
-        for r in range(ROWS):
-            print(result[r])
+        for row in range(ROWS):
+            for col in range(COLS):
+                maxGreyness = max(maxGreyness, (rowOnes[row] + colOnes[col]) - (rowZeros[row] + colZeros[col]))
                 
         return maxGreyness
 
