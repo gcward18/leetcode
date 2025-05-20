@@ -76,7 +76,7 @@ class UnionFind:
     
 class Solution:
     def minCost(self, n: int, edges: list[int], new_edges: list[int]) -> int:
-        uf = UnionFind(n)
+        uf = UnionFind(n) # wait for this
         minHeap = [] # going to track all the new_edges to add
         minCost = 0
         

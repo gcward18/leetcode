@@ -68,3 +68,6 @@ Example: A = [[1, 2], [2, 4], [3, 6]], B = [[1, 2], [2, 5]], T = 7. The pairs an
 Link: https://leetcode.com/problems/count-number-of-teams/description/
 Counting “Excellent Teams”: You are given an array of skill ratings of developers. We define an "excellent team" as a team of 3 developers (3 ratings from the array) where either the ratings are strictly increasing or strictly decreasing (when sorted by some order). Count the number of distinct excellent teams of size 3 that can be formed from the given ratings. (Order of selection doesn’t matter, and each team is an unordered triple of indices.)
 Example: Ratings = [4, 7, 3, 5]. The increasing teams of 3 are: (4,5,7) using indices (rating 4,5,7) and (3,5,7) – so 2 increasing teams. Decreasing teams: (7,5,4) and (7,5,3) – another 2. Total = 4. (Note: This problem is equivalent to counting the number of increasing or decreasing subsequences of length 3.)
+
+
+Items in Container: 
